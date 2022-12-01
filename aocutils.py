@@ -1,8 +1,5 @@
 from datetime import datetime
 
-# fname() evaluate to text file name of form dec12.txt or dec12s.txt
-fname = lambda x=datetime.today().day, s="" : f"dec{x:02}{s}.txt"
-
 # flistofstrings
 # convert text file into a list of strings
 def flistofstrings(fname):

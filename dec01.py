@@ -11,6 +11,6 @@ def dec01(fname):
     print(f"part 2: {sum(sorted(sums)[-3:])}")
 
 print("Sample")
-dec01(fname(1,"s"))
+dec01("dec01s.txt")
 print("Actual")
-dec01(fname(1))
+dec01("dec01.txt")
