@@ -1,15 +1,16 @@
-fname = "dec01.txt"
+from aocutils import *
 
-elfsums = []
-grabelfsum = lambda l,s: l.append(sum([int(x) for x in s]))
-with open(fname) as f:
-    l = f.read().splitlines()
-    while "" in l:
-        elfend = l.index("") 
-        elf = l[:elfend] # copy next elf's list
-        l = l[elfend+1:] # shorten the master list
-        grabelfsum(elfsums,elf) # sum each elf's list
-    grabelfsum(elfsums,l) # sum the last elf's list
-    print(f"max calorie elf is: {max(elfsums)}") # part 1
-    print(f"top three total calories: {sum(sorted(elfsums)[-3:])}")
+# sample: 24000 and 45000
+# actual: 70374 and 204610
     
+def dec01(fname):
+    groups = groupedstringlists(flistofstrings(fname))
+    igroups = groupedintlists(groups)
+    sums = [sum(x) for x in igroups]
+    print(f"part 1: {max(sums)}")
+    print(f"part 2: {sum(sorted(sums)[-3:])}")
+
+print("Sample")
+dec01(fname(1,"s"))
+print("Actual")
+dec01(fname(1))
