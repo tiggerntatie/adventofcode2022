@@ -1,3 +1,4 @@
+# Advent of code 01
 from aocutils import *
 
 # sample: 24000 and 45000
