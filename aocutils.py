@@ -37,4 +37,6 @@ def groupedintlists(groupedstringlist):
         ret.append(ilist)
     return ret
         
-
+# charpriority
+# convert character to integer: a = 1, A = 27, b = 2, etc..
+charpriority = lambda c: ord(c)-ord('A')+27 if c.isupper() else ord(c)-ord('a')+1
