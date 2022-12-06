@@ -1,4 +1,4 @@
-# Advent of code 05 7:25-
+# Advent of code 05
 from aocutils import *
 from re import findall
 
