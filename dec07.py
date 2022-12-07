@@ -2,7 +2,7 @@
 from aocutils import *
 from re import compile
 # Sample:  95437 and 1334506
-# Actual:    and 
+# Actual:  2669012 and 7421137
 
 
 def getdirsize(root, runningtot, spacerequired):
