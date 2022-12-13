@@ -66,7 +66,7 @@ def dec12(fname):
         for p in getpossibleneighbors(current, width, height):
             if nodes[p] > currdist + 1:
                 nodes[p] = currdist + 1
-        unvisited.pop(unvisited.find(current))
+        unvisited.pop(unvisited.index(current))
         sortunvisited()
         if current == end:
             break
