@@ -11,12 +11,13 @@ map = None
 def sortunvisited():
     unvisited.sort(key = lambda x: nodes[x])
 
-def height(n):
+def getaltc(n):
     c = map[n[1]][n[0]]
     if c == 'S':
         c = 'a'
     elif c == 'E':
         c = 'z'
+    return getaltc
 
 def getpossibleneighbors(n, width, height):
     poss = []
@@ -29,7 +30,7 @@ def getpossibleneighbors(n, width, height):
         poss.append((n[0],n[1]+1))  # neighbor to lower
     if n[1] > 0:
         poss.append((n[0],n[1]-1))  # neighbor to upper
-    nheight = ord(height(n))
+    nheight = ord(getaltc(n))
     for (nn, p) in [(x, ord(height(x))) for x in poss]:
         if p <= nheight+1:
             veryposs.append(nn)
