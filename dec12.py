@@ -29,14 +29,6 @@ def getpossibleneighbors(n, width, height):
         poss.append((n[0],n[1]+1))  # neighbor to lower
     if n[1] > 0:
         poss.append((n[0],n[1]-1))  # neighbor to upper
-    if n[0] < width and n[1] > 0:
-        poss.append((n[0]+1,n[1]-1)) # neighbor to upper right
-    if n[0] < width and n[1] < height:
-        poss.append((n[0]+1,n[1]+1)) # neighbor to lower right
-    if n[0] > 0 and n[1] > 0:
-        poss.append((n[0]-1,n[1]-1)) # neighbor to upper left
-    if n[0] > 0 and n[1] < height:
-        poss.append((n[0]-1,n[1]+1)) # neighbor to lower left
     nheight = ord(height(n))
     for (nn, p) in [(x, ord(height(x))) for x in poss]:
         if p <= nheight+1:
@@ -62,14 +54,24 @@ def dec12(fname):
             node = (x,y)
             nodes[node] = 1000000    # infinite distance
             unvisited.append(node)
+    nodes[start] = 0
     width = x
     height = y
     sortunvisited()
     current = start
     found = False
     while not found:
+        currdist = nodes[current]
+        for p in getpossibleneighbors(current, width, height):
+            if nodes[p] > currdist + 1:
+                nodes[p] = currdist + 1
+        unvisited.pop(unvisited.find(current))
+        sortunvisited()
+        if current == end:
+            break
+        current = unvisited[0]
         
-    print(f"part 2: {top2[0]*top2[1]}")
+    print(f"part 1: {nodes[current]}")
 
 print("Sample")
 dec12("dec12s.txt")
