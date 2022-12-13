@@ -77,4 +77,4 @@ def dec12(fname):
 print("Sample")
 dec12("dec12s.txt")
 print("Actual")
-#dec12("dec12.txt")
+dec12("dec12.txt")
