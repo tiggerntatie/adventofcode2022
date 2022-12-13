@@ -17,7 +17,7 @@ def getaltc(n):
         c = 'a'
     elif c == 'E':
         c = 'z'
-    return getaltc
+    return c
 
 def getpossibleneighbors(n, width, height):
     poss = []
