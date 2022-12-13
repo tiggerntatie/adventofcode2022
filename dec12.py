@@ -31,7 +31,7 @@ def getpossibleneighbors(n, width, height):
     if n[1] > 0:
         poss.append((n[0],n[1]-1))  # neighbor to upper
     nheight = ord(getaltc(n))
-    for (nn, p) in [(x, ord(height(x))) for x in poss]:
+    for (nn, p) in [(x, ord(getaltc(x))) for x in poss]:
         if p <= nheight+1:
             veryposs.append(nn)
     return veryposs
