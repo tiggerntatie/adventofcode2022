@@ -51,5 +51,5 @@ def dec14(fname):
  
 print("Sample")
 dec14("dec14s.txt")
-#print("Actual")
-#dec14("dec14.txt")
+print("Actual")
+dec14("dec14.txt")
