@@ -81,7 +81,7 @@ def spanjoiner(spans):
             else:
                 newspans.append(ospans[i])
                 i += 1
-        newspans.append(ospans[-1:])
+        newspans.extend(ospans[-1:])
         ospans = newspans[:]
     return ospans        
 
