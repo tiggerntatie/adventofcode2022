@@ -38,6 +38,7 @@ def spanjoiner(spans):
     for s in rest:
         if ol := aoverlapb(*first, *s):
             # found a match
+            print(f"ol: {}")
             first = ol
             matches.append(s)
     # update rest without matched spans
