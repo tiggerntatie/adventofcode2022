@@ -48,7 +48,7 @@ def spanjoiner(spans):
     print(f"rest2 {rest}")
     joined = spanjoiner(rest)
     print(f"returning {first}+{spanjoiner(rest)}")
-    return first + spanjoiner(rest)
+    return [first] + spanjoiner(rest)
   
 
 def oldexcludedcount(ml, row):
