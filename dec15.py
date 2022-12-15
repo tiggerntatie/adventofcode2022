@@ -65,6 +65,37 @@ def excludedcount(ml, row):
                 count -= 1
     return count
 
+# take a list of spans, find overlaps, and return a new list
+# spans are in the form [lo, hi]. Identical lo and hi indicate single digit span
+# hi > lo is an invalid span and is dropped
+def spanjoiner(spans)
+    def aoverlapb(a1, a2, b1, b2):
+        if a1 >= b1 and a2 <= b2: # a inside b
+            return (b1, b2)
+        if b1 >= a1 and b2 <= a2: # b inside a
+            return (a1, b2)
+        if a1 < b1 and a2 <= b2: # a then overlap b
+            return (a1, b2)
+        if b1 < a1 and b2 <= a2: # b then overlap a
+            return (b1, a2)
+        return False
+    # does first overlap anything else?
+    if len(spans) <= 1:
+        return spans
+    first = spans[0]
+    rest = spans[1:]
+    matches = []
+    for s in enumerate(rest):
+        if ol := aoverlapb(*first, *s):
+            # found a match
+            first = ol
+            matches.append(s)
+    # update rest without matched spans
+    rest = filter(lambda s: s not in matches, rest)
+    return first + spanjoiner(rest)
+    
+spans = [[1,1], [-3,5]]
+print(spanjoiner(spans))
 
 def dec15(fname, row):
     ins = compile(".*=([\d\-]+).*=([\d\-]+).*=([\d\-]+).*=([\d\-]+)")
@@ -74,7 +105,10 @@ def dec15(fname, row):
     print(f"part 1: {count}")
     #print(f"part 2: {count}")
  
-print("Sample")
-dec15("dec15s.txt", 10)
-print("Actual")
+ 
+
+
+#print("Sample")
+#dec15("dec15s.txt", 10)
+#print("Actual")
 #dec15("dec15.txt", 2000000)
