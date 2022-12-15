@@ -23,9 +23,9 @@ def spanjoiner(spans):
             return [b1, b2]
         if b1 >= a1 and b2 <= a2: # b inside a
             return [a1, b2]
-        if a1 < b1 and a2 <= b2: # a then overlap b
+        if a1 < b1 and a2 >= b1 and a2 <= b2: # a then overlap b
             return [a1, b2]
-        if b1 < a1 and b2 <= a2: # b then overlap a
+        if b1 < a1 and b2 >= a1 and b2 <= a2: # b then overlap a
             return [b1, a2]
         return False
     # does first overlap anything else?
@@ -38,7 +38,7 @@ def spanjoiner(spans):
     for s in rest:
         if ol := aoverlapb(*first, *s):
             # found a match
-            print(f"ol: {}")
+            print(f"ol: {ol}")
             first = ol
             matches.append(s)
     # update rest without matched spans
