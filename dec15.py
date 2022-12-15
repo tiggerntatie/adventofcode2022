@@ -64,9 +64,8 @@ def spanjoiner(spans):
             return [a1, b2]  # a overlaps b
         return False
         
-    sspans = sorted(span)    
+    ospans = sorted(spans)    
     changed = True
-    ospans = spans[:]
     while changed:
         newspans = []
         i = 0
