@@ -29,7 +29,7 @@ def spanjoiner(spans):
             return [b1, a2]
         return False
     # does first overlap anything else?
-    print(spans)
+    print(f"spanjoiner in: {spans}")
     if len(spans) <= 1:
         return spans
     first = spans[0]
@@ -38,17 +38,13 @@ def spanjoiner(spans):
     for s in rest:
         if ol := aoverlapb(*first, *s):
             # found a match
-            print(f"ol: {ol}")
             first = ol
             matches.append(s)
     # update rest without matched spans
-    print(f"rest1 {rest}")
-    print(f"matches {matches}")
     rest = list(filter(lambda s: s not in matches, rest))
-    print(f"rest2 {rest}")
     joined = spanjoiner(rest)
-    print(f"returning {first}+{spanjoiner(rest)}")
-    return [first] + spanjoiner(rest)
+    print(f"spanjoiner out: {[first]+joined}")
+    return [first] + joined
   
 
 def oldexcludedcount(ml, row):
