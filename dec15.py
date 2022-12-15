@@ -45,8 +45,8 @@ def excludedcount(ml, row):
     done = False
     while not done:
         restart = False
-        for i in ranges(len(ranges)-1):
-            for j in ranges(1, len(ranges)):
+        for i in range(len(ranges)-1):
+            for j in range(1, len(ranges)):
                 if crange := aoverlapb(*ranges[i], *ranges[j]):
                     ranges[i] = crange
                     del(ranges[j])
