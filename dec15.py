@@ -2,53 +2,18 @@
 from re import compile
 from aocutils import *
 # Sample: row 10: 26  and 
-# Actual: row 2000000:  and  
+# Actual: row 2000000: 5607466 and  
 
 def mdist(x1,y1,x2,y2):
     return abs(x1-x2)+abs(y1-y2)
 
 # start and end x-coordinates for y-row positions less or equal to distance to x,y
 def boundsdist(yrow, dist, x, y):
-    deltax = dist-abs(y-yrow)+1
+    deltax = dist-abs(y-yrow)
     if deltax < 0:
         return False # nothing on this row is excluded
     return [x-deltax, x+deltax]
 
-# take a list of spans, find overlaps, and return a new list
-# spans are in the form [lo, hi]. Identical lo and hi indicate single place span
-# hi < lo is an invalid span 
-def oldspanjoiner(spans):
-    def aoverlapb(a1, a2, b1, b2):
-        if a1 >= b1 and a2 <= b2: # a inside b
-            return [b1, b2]
-        if b1 >= a1 and b2 <= a2: # b inside a
-            return [a1, a2]
-        if a1 < b1 and a2 >= b1 and a2 <= b2: # a then overlap b
-            return [a1, b2]
-        if b1 < a1 and b2 >= a1 and b2 <= a2: # b then overlap a
-            return [b1, a2]
-        return False
-        
-    print(f"spans in: {spans}")    
-    # does first overlap anything else?
-    if len(spans) <= 1:
-        return spans
-    first = spans[0]
-    rest = spans[1:]
-    matches = []
-    for s in rest:
-        print(f"checking {first} and {s}")
-        if ol := aoverlapb(*first, *s):
-            print("matched!")
-            # found a match
-            first = ol
-            matches.append(s)
-    # update rest without matched spans
-    rest = list(filter(lambda s: s not in matches, rest))
-    print(f"first: {first}")
-    joined = spanjoiner(rest)
-    print(f"spans out: {[first]+joined}")    
-    return [first] + joined
 
 # take a list of spans, find overlaps, and return a new list
 # spans are in the form [lo, hi]. Identical lo and hi indicate single place span
@@ -114,4 +79,4 @@ def dec15(fname, row):
 print("Sample")
 dec15("dec15s.txt", 10)
 print("Actual")
-dec15("dec15.txt", 2000000)  # 4729524 is not correct!!
+dec15("dec15.txt", 2000000)  
