@@ -43,6 +43,7 @@ def spanjoiner(spans):
             matches.append(s)
     # update rest without matched spans
     rest = list(filter(lambda s: s not in matches, rest))
+    print(f"first: {first}")
     joined = spanjoiner(rest)
     print(f"spans out: {[first]+joined}")    
     return [first] + joined
