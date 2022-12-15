@@ -54,6 +54,8 @@ def dec15(fname, row):
     rowbeacons = list(filter(lambda l: l[3] == row, ml))
     rowbeacons = set([(l[2],l[3]) for l in rowbeacons])
     # onlyl count rowbeacons within spans
+    print(f"spans {spans}")
+    print(f"rowbeacons {rowbeacons}")
     rbc = 0
     for s in spans:
         for b in rowbeacons:
