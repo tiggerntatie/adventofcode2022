@@ -15,15 +15,16 @@ def boundsdist(yrow, dist, x, y):
     return (x-deltax+1, x+deltax-1)
 
 def excludedcount(ml, row):
-    #ranges = [boundsdist(row, )]
-    pass
+    ranges = [boundsdist(row, l[4], l[0], l[1]) for l in ml]
+    print(ranges)
+    return 0
 
 def dec15(fname):
     ins = compile(".*=([\d\-]+).*=([\d\-]+).*=([\d\-]+).*=([\d\-]+)")
     ml = [[int(m.group(i)) for i in range(1,5)] for m in [ins.search(s) for s in flistofstrings(fname)]]
     ml = [l + [mdist(*l)] for l in ml]
-    print(ml)
-    #print(f"part 1: {grains}")
+    count = excludedcount(ml, 10)
+    print(f"part 1: {count}")
     #print(f"part 2: {grains}")
  
 print("Sample")
