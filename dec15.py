@@ -12,14 +12,19 @@ def boundsdist(yrow, dist, x, y):
     deltax = dist-abs(y-yrow)
     if deltax <= 0:
         return (0,0) # nothing on this row is excluded
-    return (x-deltax+1, x+deltax-1)
+    return (x-deltax, x+deltax)
 
 def excludedcount(ml, row):
     ranges = [boundsdist(row, l[4], l[0], l[1]) for l in ml]
     exc = set()
     for r in ranges:
+        print(r)
         if r[0] != r[1]:
             exc.update(range(r[0], r[1]+1))
+    # remove known beacons
+    for l in ml:
+        if l[3] == row and l[2] in exc:
+            exc.remove(l[2])
     return len(exc)
 
 def dec15(fname):
