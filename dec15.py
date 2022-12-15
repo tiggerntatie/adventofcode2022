@@ -22,7 +22,7 @@ def spanjoiner(spans):
         if a1 >= b1 and a2 <= b2: # a inside b
             return [b1, b2]
         if b1 >= a1 and b2 <= a2: # b inside a
-            return [a1, b2]
+            return [a1, a2]
         if a1 < b1 and a2 >= b1 and a2 <= b2: # a then overlap b
             return [a1, b2]
         if b1 < a1 and b2 >= a1 and b2 <= a2: # b then overlap a
