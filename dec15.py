@@ -16,7 +16,7 @@ def boundsdist(yrow, dist, x, y):
 
 def excludedcount(ml, row):
     ranges = [boundsdist(row, l[4], l[0], l[1]) for l in ml]
-    exc = {[]}
+    exc = set()
     for r in ranges:
         if r[0] != r[1]:
             exc.update(range(r[0], r[1]+1))
