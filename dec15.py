@@ -80,7 +80,7 @@ def spanjoiner(spans):
             else:
                 newspans.append(ospans[i])
                 i += 1
-        ospans = newspans
+        ospans = newspans[:]
     return ospans        
 
 def dec15(fname, row):
