@@ -7,9 +7,9 @@ from aocutils import *
 def mdist(x1,y1,x2,y2):
     return abs(x1-x2)+abs(y1-y2)
 
-# start and end x-coordinates for y-row positions less than distance to x,y
+# start and end x-coordinates for y-row positions less or equal to distance to x,y
 def boundsdist(yrow, dist, x, y):
-    deltax = dist-abs(y-yrow)-1
+    deltax = dist-abs(y-yrow)+1
     if deltax < 0:
         return False # nothing on this row is excluded
     return [x-deltax, x+deltax]
@@ -29,7 +29,6 @@ def spanjoiner(spans):
             return [b1, a2]
         return False
     # does first overlap anything else?
-    print(f"spanjoiner in: {spans}")
     if len(spans) <= 1:
         return spans
     first = spans[0]
@@ -43,50 +42,7 @@ def spanjoiner(spans):
     # update rest without matched spans
     rest = list(filter(lambda s: s not in matches, rest))
     joined = spanjoiner(rest)
-    print(f"spanjoiner out: {[first]+joined}")
     return [first] + joined
-  
-
-def oldexcludedcount(ml, row):
-    ranges = [boundsdist(row, l[4], l[0], l[1]) for l in ml]
-    exc = set()
-    for r in ranges:
-        print(r)
-        if r[0] != r[1]:
-            exc.update(range(r[0], r[1]+1))
-    # remove known beacons
-    for l in ml:
-        if l[3] == row and l[2] in exc:
-            exc.remove(l[2])
-    return len(exc)
-
-
-def excludedcount(ml, row):
-    ranges = [boundsdist(row, l[4], l[0], l[1]) for l in ml]
-    # remove null ranges
-    ranges = list(filter(lambda x: x[0] != x[1], ranges))
-    return 0
-    done = False
-    while not done:
-        restart = False
-        for i in range(len(ranges)-1):
-            for j in range(1, len(ranges)):
-                if crange := aoverlapb(*ranges[i], *ranges[j]):
-                    ranges[i] = crange
-                    del(ranges[j])
-                    restart = True
-                    break
-                elif i == len(ranges)-2 and j == len(ranges)-1:
-                    done = True
-            if restart:
-                break
-    count = 0
-    for r in ranges:
-        count += r[1]-r[0]
-        for l in ml:    # remove any beacons in this range
-            if l[3] == row and l[2] >= r[0] and l[2] <= r[1]:
-                count -= 1
-    return count
 
   
 def dec15(fname, row):
@@ -96,18 +52,14 @@ def dec15(fname, row):
     # ml is now list of 5: sensorxy, beaconxy, distance
     spans = spanjoiner(list(filter(lambda x: x, [boundsdist(row, l[4], l[0], l[1]) for l in ml])))
     rowbeacons = list(filter(lambda l: l[3] == row, ml))
-    rowbeacons = count(set([(l[2],l[3]) for l in rowbeacons]))
-    #rowbeacons = len(set([l[3] == row for l in ml]))
-    print(f"rowbeacons {rowbeacons}")
+    rowbeacons = len(set([(l[2],l[3]) for l in rowbeacons]))
     count = sum([l[1]-l[0]+1 for l in spans]) - rowbeacons
 
     print(f"part 1: {count}")
     #print(f"part 2: {count}")
- 
- 
 
 
 print("Sample")
 dec15("dec15s.txt", 10)
-#print("Actual")
-#dec15("dec15.txt", 2000000)
+print("Actual")
+dec15("dec15.txt", 2000000)
