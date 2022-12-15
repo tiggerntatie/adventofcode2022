@@ -71,7 +71,7 @@ def spanjoiner(spans):
         newspans = []
         i = 0
         changed = False
-        while i < len(ospans):
+        while i < len(ospans)+1:
             print(f"comparing {ospans[i]} with {ospans[i+1]}")
             if ol := aoverlapb(*ospans[i], *ospans[i+1]):
                 newspans.append(ol)
@@ -81,6 +81,7 @@ def spanjoiner(spans):
             else:
                 newspans.append(ospans[i])
                 i += 1
+        newspans.append(ospans[-1:])
         ospans = newspans[:]
     return ospans        
 
