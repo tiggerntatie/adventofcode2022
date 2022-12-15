@@ -28,6 +28,8 @@ def spanjoiner(spans):
         if b1 < a1 and b2 >= a1 and b2 <= a2: # b then overlap a
             return [b1, a2]
         return False
+        
+    print(f"spans in: {spans}")    
     # does first overlap anything else?
     if len(spans) <= 1:
         return spans
@@ -42,6 +44,7 @@ def spanjoiner(spans):
     # update rest without matched spans
     rest = list(filter(lambda s: s not in matches, rest))
     joined = spanjoiner(rest)
+    print(f"spans out: {[first]+joined}")    
     return [first] + joined
 
   
