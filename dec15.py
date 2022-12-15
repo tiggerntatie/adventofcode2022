@@ -9,10 +9,40 @@ def mdist(x1,y1,x2,y2):
 
 # start and end x-coordinates for y-row positions less than distance to x,y
 def boundsdist(yrow, dist, x, y):
-    deltax = dist-abs(y-yrow)
-    if deltax <= 0:
-        return (0,0) # nothing on this row is excluded
+    deltax = dist-abs(y-yrow)-1
+    if deltax < 0:
+        return False # nothing on this row is excluded
     return (x-deltax, x+deltax)
+
+# take a list of spans, find overlaps, and return a new list
+# spans are in the form [lo, hi]. Identical lo and hi indicate single place span
+# hi > lo is an invalid span and is dropped
+def spanjoiner(spans):
+    def aoverlapb(a1, a2, b1, b2):
+        if a1 >= b1 and a2 <= b2: # a inside b
+            return [b1, b2]
+        if b1 >= a1 and b2 <= a2: # b inside a
+            return [a1, b2]
+        if a1 < b1 and a2 <= b2: # a then overlap b
+            return [a1, b2]
+        if b1 < a1 and b2 <= a2: # b then overlap a
+            return [b1, a2]
+        return False
+    # does first overlap anything else?
+    if len(spans) <= 1:
+        return spans
+    first = spans[0]
+    rest = spans[1:]
+    matches = []
+    for s in rest:
+        if ol := aoverlapb(*first, *s):
+            # found a match
+            first = ol
+            matches.append(s)
+    # update rest without matched spans
+    rest = list(filter(lambda s: s not in matches, rest))
+    return first + spanjoiner(rest)
+  
 
 def oldexcludedcount(ml, row):
     ranges = [boundsdist(row, l[4], l[0], l[1]) for l in ml]
@@ -27,16 +57,6 @@ def oldexcludedcount(ml, row):
             exc.remove(l[2])
     return len(exc)
 
-def aoverlapb(a1, a2, b1, b2):
-    if a1 >= b1 and a2 <= b2: # a inside b
-        return (b1, b2)
-    if b1 >= a1 and b2 <= a2: # b inside a
-        return (a1, b2)
-    if a1 < b1 and a2 <= b2: # a then overlap b
-        return (a1, b2)
-    if b1 < a1 and b2 <= a2: # b then overlap a
-        return (b1, a2)
-    return False
 
 def excludedcount(ml, row):
     ranges = [boundsdist(row, l[4], l[0], l[1]) for l in ml]
@@ -65,43 +85,16 @@ def excludedcount(ml, row):
                 count -= 1
     return count
 
-# take a list of spans, find overlaps, and return a new list
-# spans are in the form [lo, hi]. Identical lo and hi indicate single digit span
-# hi > lo is an invalid span and is dropped
-def spanjoiner(spans):
-    def aoverlapb(a1, a2, b1, b2):
-        if a1 >= b1 and a2 <= b2: # a inside b
-            return [b1, b2]
-        if b1 >= a1 and b2 <= a2: # b inside a
-            return [a1, b2]
-        if a1 < b1 and a2 <= b2: # a then overlap b
-            return [a1, b2]
-        if b1 < a1 and b2 <= a2: # b then overlap a
-            return [b1, a2]
-        return False
-    # does first overlap anything else?
-    if len(spans) <= 1:
-        return spans
-    first = spans[0]
-    rest = spans[1:]
-    matches = []
-    for s in rest:
-        if ol := aoverlapb(*first, *s):
-            # found a match
-            first = ol
-            matches.append(s)
-    # update rest without matched spans
-    rest = list(filter(lambda s: s not in matches, rest))
-    return first + spanjoiner(rest)
-    
-spans = [[8,9],[1,1], [-3,5], [4,10]]
-print(spanjoiner(spans))
-
+  
 def dec15(fname, row):
     ins = compile(".*=([\d\-]+).*=([\d\-]+).*=([\d\-]+).*=([\d\-]+)")
     ml = [[int(m.group(i)) for i in range(1,5)] for m in [ins.search(s) for s in flistofstrings(fname)]]
     ml = [l + [mdist(*l)] for l in ml]
-    count = excludedcount(ml, row)
+    # ml is now list of 5: sensorxy, beaconxy, distance
+    spans = spanjoiner([boundsdist(row, l[4], l[0], l[1]) for l in ml])
+    rowbeacons = sum([l[3] == row for l in ml])
+    count = sum([l[1]-l[0]+1 for l in spans]) - rowbeacons
+
     print(f"part 1: {count}")
     #print(f"part 2: {count}")
  
