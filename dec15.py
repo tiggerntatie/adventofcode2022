@@ -52,8 +52,14 @@ def dec15(fname, row):
     # ml is now list of 5: sensorxy, beaconxy, distance
     spans = spanjoiner(list(filter(lambda x: x, [boundsdist(row, l[4], l[0], l[1]) for l in ml])))
     rowbeacons = list(filter(lambda l: l[3] == row, ml))
-    rowbeacons = len(set([(l[2],l[3]) for l in rowbeacons]))
-    count = sum([l[1]-l[0]+1 for l in spans]) - rowbeacons
+    rowbeacons = set([(l[2],l[3]) for l in rowbeacons])
+    # onlyl count rowbeacons within spans
+    rbc = 0
+    for s in spans:
+        for b in rowbeacons:
+            if b[0] >= s[0] and b[0] <= s[1]:
+                rbc += 1
+    count = sum([l[1]-l[0]+1 for l in spans]) - rbc
 
     print(f"part 1: {count}")
     #print(f"part 2: {count}")
@@ -62,4 +68,4 @@ def dec15(fname, row):
 print("Sample")
 dec15("dec15s.txt", 10)
 print("Actual")
-dec15("dec15.txt", 2000000)
+dec15("dec15.txt", 2000000)  # 4729524 is not correct!!
