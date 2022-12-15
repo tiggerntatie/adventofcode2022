@@ -41,7 +41,7 @@ def aoverlapb(a1, a2, b1, b2):
 def excludedcount(ml, row):
     ranges = [boundsdist(row, l[4], l[0], l[1]) for l in ml]
     # remove null ranges
-    ranges = filter(lambda x: x[0] != x[1], ranges)
+    ranges = list(filter(lambda x: x[0] != x[1], ranges))
     done = False
     while not done:
         restart = False
