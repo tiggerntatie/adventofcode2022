@@ -21,7 +21,7 @@ def excludedcount(ml, row):
 def dec15(fname):
     ins = compile(".*=([\d\-]+).*=([\d\-]+).*=([\d\-]+).*=([\d\-]+)")
     ml = [[int(m.group(i)) for i in range(1,5)] for m in [ins.search(s) for s in flistofstrings(fname)]]
-    ml = [x.extend(mdist(*x)) for x in ml]
+    ml = [l + [mdist(*l)] for l in ml]
     print(ml)
     #print(f"part 1: {grains}")
     #print(f"part 2: {grains}")
