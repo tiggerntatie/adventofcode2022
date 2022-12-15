@@ -37,7 +37,9 @@ def spanjoiner(spans):
     rest = spans[1:]
     matches = []
     for s in rest:
+        print(f"checking {first} and {s}")
         if ol := aoverlapb(*first, *s):
+            print("matched!")
             # found a match
             first = ol
             matches.append(s)
