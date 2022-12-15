@@ -85,7 +85,7 @@ def spanjoiner(spans):
     first = spans[0]
     rest = spans[1:]
     matches = []
-    for s in enumerate(rest):
+    for s in rest:
         if ol := aoverlapb(*first, *s):
             # found a match
             first = ol
