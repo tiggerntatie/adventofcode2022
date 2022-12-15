@@ -67,7 +67,9 @@ def spanjoiner(spans):
     ospans = sorted(spans)    
     print(f"starting spans {ospans}")
     changed = True
-    while changed:
+    j = 0
+    while changed and j < 50:
+        j += 1
         newspans = []
         i = 0
         changed = False
