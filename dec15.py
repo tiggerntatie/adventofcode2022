@@ -27,16 +27,15 @@ def excludedcount(ml, row):
             exc.remove(l[2])
     return len(exc)
 
-def dec15(fname):
+def dec15(fname, row):
     ins = compile(".*=([\d\-]+).*=([\d\-]+).*=([\d\-]+).*=([\d\-]+)")
     ml = [[int(m.group(i)) for i in range(1,5)] for m in [ins.search(s) for s in flistofstrings(fname)]]
     ml = [l + [mdist(*l)] for l in ml]
-    scount = excludedcount(ml, 10)
-    count = excludedcount(ml, 2000000)
-    print(f"part 1: {scount} and {count}")
-    #print(f"part 2: {grains}")
+    count = excludedcount(ml, row)
+    print(f"part 1: {scount}}")
+    #print(f"part 2: {count}")
  
 print("Sample")
-dec15("dec15s.txt")
-#print("Actual")
-#dec15("dec15.txt")
+dec15("dec15s.txt", 10)
+print("Actual")
+dec15("dec15.txt", 2000000)
