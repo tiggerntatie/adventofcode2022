@@ -32,7 +32,7 @@ def dec15(fname, row):
     ml = [[int(m.group(i)) for i in range(1,5)] for m in [ins.search(s) for s in flistofstrings(fname)]]
     ml = [l + [mdist(*l)] for l in ml]
     count = excludedcount(ml, row)
-    print(f"part 1: {scount}}")
+    print(f"part 1: {scount}")
     #print(f"part 2: {count}")
  
 print("Sample")
