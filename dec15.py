@@ -95,7 +95,8 @@ def dec15(fname, row):
     ml = [l + [mdist(*l)] for l in ml]
     # ml is now list of 5: sensorxy, beaconxy, distance
     spans = spanjoiner(list(filter(lambda x: x, [boundsdist(row, l[4], l[0], l[1]) for l in ml])))
-    rowbeacons = sum([l[3] == row for l in ml])
+    rowbeacons = len(set(list(filter(lambda l: l[3] == row, ml))))
+    #rowbeacons = len(set([l[3] == row for l in ml]))
     print(f"rowbeacons {rowbeacons}")
     count = sum([l[1]-l[0]+1 for l in spans]) - rowbeacons
 
