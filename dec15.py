@@ -91,7 +91,7 @@ def spanjoiner(spans):
             first = ol
             matches.append(s)
     # update rest without matched spans
-    rest = filter(lambda s: s not in matches, rest)
+    rest = list(filter(lambda s: s not in matches, rest))
     return first + spanjoiner(rest)
     
 spans = [[1,1], [-3,5]]
