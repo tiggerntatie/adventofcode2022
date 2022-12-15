@@ -31,8 +31,9 @@ def dec15(fname):
     ins = compile(".*=([\d\-]+).*=([\d\-]+).*=([\d\-]+).*=([\d\-]+)")
     ml = [[int(m.group(i)) for i in range(1,5)] for m in [ins.search(s) for s in flistofstrings(fname)]]
     ml = [l + [mdist(*l)] for l in ml]
-    count = excludedcount(ml, 10)
-    print(f"part 1: {count}")
+    scount = excludedcount(ml, 10)
+    count = excludedcount(ml, 2000000)
+    print(f"part 1: {scount} and {count}")
     #print(f"part 2: {grains}")
  
 print("Sample")
