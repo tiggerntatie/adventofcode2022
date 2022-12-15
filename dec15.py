@@ -29,6 +29,7 @@ def spanjoiner(spans):
             return [b1, a2]
         return False
     # does first overlap anything else?
+    print(spans)
     if len(spans) <= 1:
         return spans
     first = spans[0]
@@ -92,7 +93,7 @@ def dec15(fname, row):
     ml = [[int(m.group(i)) for i in range(1,5)] for m in [ins.search(s) for s in flistofstrings(fname)]]
     ml = [l + [mdist(*l)] for l in ml]
     # ml is now list of 5: sensorxy, beaconxy, distance
-    spans = spanjoiner([boundsdist(row, l[4], l[0], l[1]) for l in ml])
+    spans = spanjoiner(list(filter(lambda x: x, [boundsdist(row, l[4], l[0], l[1]) for l in ml])))
     rowbeacons = sum([l[3] == row for l in ml])
     count = sum([l[1]-l[0]+1 for l in spans]) - rowbeacons
 
