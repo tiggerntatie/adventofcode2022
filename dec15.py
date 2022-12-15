@@ -16,8 +16,8 @@ def boundsdist(yrow, dist, x, y):
 
 # take a list of spans, find overlaps, and return a new list
 # spans are in the form [lo, hi]. Identical lo and hi indicate single place span
-# hi > lo is an invalid span and is dropped
-def spanjoiner(spans):
+# hi < lo is an invalid span 
+def oldspanjoiner(spans):
     def aoverlapb(a1, a2, b1, b2):
         if a1 >= b1 and a2 <= b2: # a inside b
             return [b1, b2]
@@ -50,7 +50,38 @@ def spanjoiner(spans):
     print(f"spans out: {[first]+joined}")    
     return [first] + joined
 
-  
+# take a list of spans, find overlaps, and return a new list
+# spans are in the form [lo, hi]. Identical lo and hi indicate single place span
+# hi < lo is an invalid span 
+def spanjoiner(spans):
+    # overlap and combine - assumes (b1,b2) >= (a1,a2)
+    def aoverlapb(a1, a2, b1, b2):
+        if a1 == b1 and a2 == b2:
+            return [a1, a2]
+        if b2 <= a2:
+            return [a1, a2]  # b inside a
+        if b2 > a2 and b1 <= a2:
+            return [a1, b2]  # a overlaps b
+        return False
+        
+    sspans = sorted(span)    
+    changed = True
+    ospans = spans[:]
+    while changed:
+        newspans = []
+        i = 0
+        changed = False
+        while i < len(ospans) - 1:
+            if ol := aoverlapb(*ospans[i], *ospans[i+1]):
+                newspans.append(ol)
+                changed = True
+                i += 2
+            else:
+                newspans.append(ospans[i])
+                i += 1
+        ospans = newspans
+    return ospans        
+
 def dec15(fname, row):
     ins = compile(".*=([\d\-]+).*=([\d\-]+).*=([\d\-]+).*=([\d\-]+)")
     ml = [[int(m.group(i)) for i in range(1,5)] for m in [ins.search(s) for s in flistofstrings(fname)]]
