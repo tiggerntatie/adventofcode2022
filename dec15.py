@@ -16,8 +16,11 @@ def boundsdist(yrow, dist, x, y):
 
 def excludedcount(ml, row):
     ranges = [boundsdist(row, l[4], l[0], l[1]) for l in ml]
-    print(ranges)
-    return 0
+    exc = {[]}
+    for r in ranges:
+        if r[0] != r[1]:
+            exc.update(range(r[0], r[1]+1))
+    return len(exc)
 
 def dec15(fname):
     ins = compile(".*=([\d\-]+).*=([\d\-]+).*=([\d\-]+).*=([\d\-]+)")
