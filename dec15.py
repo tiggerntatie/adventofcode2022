@@ -41,6 +41,7 @@ def spanjoiner(spans):
             matches.append(s)
     # update rest without matched spans
     rest = list(filter(lambda s: s not in matches, rest))
+    joined = spanjoiner(rest)
     return first + spanjoiner(rest)
   
 
@@ -101,7 +102,7 @@ def dec15(fname, row):
  
 
 
-#print("Sample")
-#dec15("dec15s.txt", 10)
+print("Sample")
+dec15("dec15s.txt", 10)
 #print("Actual")
 #dec15("dec15.txt", 2000000)
