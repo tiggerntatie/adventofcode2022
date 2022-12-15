@@ -6,7 +6,7 @@ from aocutils import *
 
 
 def dec15(fname):
-    ins = compile(".*(\-?[\d]+).*(\-?[\d]+).*(\-?[\d]+).*(\-?[\d]+)")
+    ins = compile(".*=([\d\-]+).*=([\d\-]+).*=([\d\-]+).*=([\d\-]+)")
     ml = [[int(m.group(i)) for i in range(1,5)] for m in [ins.search(s) for s in flistofstrings(fname)]]
     print(ml)
     #print(f"part 1: {grains}")
