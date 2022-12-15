@@ -74,7 +74,7 @@ def spanjoiner(spans):
             printf(f"comparing {ospans[i]} with {ospans[i+1]}")
             if ol := aoverlapb(*ospans[i], *ospans[i+1]):
                 newspans.append(ol)
-                prinft(f"combined to {ol}")
+                print(f"combined to {ol}")
                 changed = True
                 i += 2
             else:
