@@ -68,7 +68,7 @@ def excludedcount(ml, row):
 # take a list of spans, find overlaps, and return a new list
 # spans are in the form [lo, hi]. Identical lo and hi indicate single digit span
 # hi > lo is an invalid span and is dropped
-def spanjoiner(spans)
+def spanjoiner(spans):
     def aoverlapb(a1, a2, b1, b2):
         if a1 >= b1 and a2 <= b2: # a inside b
             return (b1, b2)
