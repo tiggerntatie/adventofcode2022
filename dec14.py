@@ -1,7 +1,7 @@
 # Advent of code 14
 from aocutils import *
 #from re import compile
-# Sample:  24 and 
+# Sample:  24 and 93
 # Actual:   and 
 
 # series of integers from start to end
