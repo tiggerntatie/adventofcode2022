@@ -85,7 +85,8 @@ def spanjoiner(spans):
                 i += 1
         if i == len(ospans):
             newspans.extend(ospans[-1:])
-        ospans = newspans[:]
+        if changed:
+            ospans = newspans[:]
     return ospans        
 
 def dec15(fname, row):
