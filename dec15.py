@@ -94,7 +94,7 @@ def spanjoiner(spans):
     rest = list(filter(lambda s: s not in matches, rest))
     return first + spanjoiner(rest)
     
-spans = [[1,1], [-3,5], [4,10]]
+spans = [[8,9],[1,1], [-3,5], [4,10]]
 print(spanjoiner(spans))
 
 def dec15(fname, row):
