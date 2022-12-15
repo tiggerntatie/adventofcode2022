@@ -41,9 +41,10 @@ def spanjoiner(spans):
             first = ol
             matches.append(s)
     # update rest without matched spans
-    print("rest1 {rest}")
+    print(f"rest1 {rest}")
+    print(f"matches {matches}")
     rest = list(filter(lambda s: s not in matches, rest))
-    print("rest2 {rest}")
+    print(f"rest2 {rest}")
     joined = spanjoiner(rest)
     return first + spanjoiner(rest)
   
