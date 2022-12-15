@@ -42,6 +42,7 @@ def excludedcount(ml, row):
     ranges = [boundsdist(row, l[4], l[0], l[1]) for l in ml]
     # remove null ranges
     ranges = list(filter(lambda x: x[0] != x[1], ranges))
+    return 0
     done = False
     while not done:
         restart = False
