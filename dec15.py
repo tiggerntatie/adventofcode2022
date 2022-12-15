@@ -12,7 +12,7 @@ def boundsdist(yrow, dist, x, y):
     deltax = dist-abs(y-yrow)-1
     if deltax < 0:
         return False # nothing on this row is excluded
-    return (x-deltax, x+deltax)
+    return [x-deltax, x+deltax]
 
 # take a list of spans, find overlaps, and return a new list
 # spans are in the form [lo, hi]. Identical lo and hi indicate single place span
@@ -47,6 +47,7 @@ def spanjoiner(spans):
     rest = list(filter(lambda s: s not in matches, rest))
     print(f"rest2 {rest}")
     joined = spanjoiner(rest)
+    print(f"returning {first}+{spanjoiner(rest)}")
     return first + spanjoiner(rest)
   
 
