@@ -32,7 +32,7 @@ def dec16(fname):
     # flow rate, open/closed, connected valve list
     for v in [valves.search(s) for s in flistofstrings(fname)]:
         vd[v.group(1)] = [int(v.group(2)), 0, v.group(3).split(', ')]
-    totflow = bvf(vd, 'AA', 5)
+    totflow = bvf(vd, 'AA', 10)
     print(f"part 1: {totflow}")
 
     #print(f"part 2: {tfreq}")
@@ -40,5 +40,5 @@ def dec16(fname):
 
 print("Sample")
 dec16("dec16s.txt")
-print("Actual")
-dec16("dec16.txt")  
+#print("Actual")
+#dec16("dec16.txt")  
