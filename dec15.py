@@ -86,7 +86,7 @@ def dec15(fname, row):
     coords = []
     for p in pbounds:
         for n in nbounds:
-            coords.append((n[0][1]-p[0][1],(n[0][1]+p[0][1])//2))
+            coords.append(((n[0][1]-p[0][1])//2,(n[0][1]+p[0][1])//2))
     #print(pbounds)
     #print(nbounds)
     print(coords)
