@@ -8,19 +8,22 @@ from aocutils import *
 #  best valve flow
 def bvf(vd, startvalve, timeleft):
     print(f"{startvalve} {timeleft}")
-    if timeleft <= 0:
+    if timeleft <= 1:
+        # no time left to add more flow
         return 0
     v = vd[startvalve]
-    t1 = []
-    t2 = []
     if v[1] or v[0] == 0:    # valve already open, or 0 flow, get times to other nodes
         t1 = [bvf(vd, xx, timeleft-1) for xx in v[2]]
+        return max(t1)        
     else:
         # assume opening valve: remaining flow for this valve plus the rest
-        v[1] = 1
-        t2 = [v[0]*(timeleft-1) + bvf(vd, xx, timeleft-2) for xx in v[2]]
-    return max(t1+t2)
-     
+        if timeleft == 2:
+            return v[0]
+        else:
+            v[1] = 1
+            t2 = [v[0]*(timeleft-1) + bvf(vd, xx, timeleft-2) for xx in v[2]]
+            return max(t2)
+
 # example input line
 # Valve BB has flow rate=13; tunnels lead to valves CC, AA
 def dec16(fname):
