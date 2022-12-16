@@ -40,7 +40,7 @@ def dec16(fname):
         vd[v.group(1)] = [int(v.group(2)), 0, v.group(3).split(', ')]
         if vd[v.group(1)][0] > 0:
             valvecount += 1
-    totflow = bvf(vd, 'AA', 10)
+    totflow = bvf(vd, 'AA', 30)
     print(f"part 1: {totflow}")
 
     #print(f"part 2: {tfreq}")
