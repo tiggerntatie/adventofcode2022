@@ -5,14 +5,11 @@ from aocutils import *
 # Sample: 1651 and 
 # Actual: and 
 
-count = 0
 #  best valve flow
 def bvf(vd, startvalve, timeleft):
-    global count
-    count += 1
-    if count == 10:
-        return 0
     if timeleft <= 0:
+        return 0
+    if timeleft == 30:
         return 0
     v = vd[startvalve]
     t1 = []
