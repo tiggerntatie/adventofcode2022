@@ -73,8 +73,8 @@ def dec15(fname, row):
     # for the first diagonal row of cells outside the disallowed region
     # we hope to see two sets of coincident lines
     bounds = Counter()
-    xylimit = 20
-    #xylimit = 4000000
+    #xylimit = 20
+    xylimit = 4000000
     for l in ml:
         s = []
         s.append(('+',l[1]+l[4]-l[0]+1))
