@@ -86,13 +86,17 @@ def dec15(fname, row):
     pbounds = list(filter(lambda x: x[0][0]=='+' and x[1]>1, bounds.items()))
     nbounds = list(filter(lambda x: x[0][0]=='-' and x[1]>1, bounds.items()))
     coords = []
+    # now find the all of the coordinates where these + and - lines meet
     for p in pbounds:
         for n in nbounds:
             coords.append(((n[0][1]-p[0][1])//2,(n[0][1]+p[0][1])//2))
+    # rule out any coordinates outside the "box"
     coords = list(filter(lambda x: 0<=x[0]<=xylimit and 0<=x[1]<=xylimit, coords))
     tfreq = 0
+    # find the first coordinate that is not inside the range of any sensor
     for c in coords:
         if not sum([mdist(*c,*x[:2])<=x[4] for x in ml]):
+            # FOUND IT!!
             tfreq = 4000000*c[0]+c[1]
             break
     print(f"part 2: {tfreq}")
