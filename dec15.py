@@ -2,8 +2,8 @@
 from re import compile
 from collections import Counter
 from aocutils import *
-# Sample: row 10: 26  and 
-# Actual: row 2000000: 5607466 and  
+# Sample: row 10: 26 and 56000011
+# Actual: row 2000000: 5607466 and 12543202766584
 
 def mdist(x1,y1,x2,y2):
     return abs(x1-x2)+abs(y1-y2)
@@ -73,8 +73,8 @@ def dec15(fname, row):
     # for the first diagonal row of cells outside the disallowed region
     # we hope to see two sets of coincident lines
     bounds = Counter()
-    #xylimit = 20
-    xylimit = 4000000
+    xylimit = 20
+    #xylimit = 4000000
     for l in ml:
         s = []
         s.append(('+',l[1]+l[4]-l[0]+1))
