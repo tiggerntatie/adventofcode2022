@@ -7,6 +7,7 @@ from aocutils import *
 
 #  best valve flow
 def bvf(vd, startvalve, timeleft):
+    print(f"{startvalve} {timeleft}")
     if timeleft <= 0:
         return 0
     if timeleft == 30:
