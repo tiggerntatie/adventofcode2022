@@ -83,15 +83,13 @@ def dec15(fname, row):
         s.append(('-',l[1]-l[4]+l[0]-1))
         bounds.update(s)
     # remove singletons and split into + and -
-    pbounds = list(filter(lambda x: x[0][0]=='+', bounds.items()))
-    nbounds = list(filter(lambda x: x[0][0]=='-', bounds.items()))
-    #pbounds = list(filter(lambda x: x[0][0]=='+' and x[1]>1, bounds.items()))
-    #nbounds = list(filter(lambda x: x[0][0]=='-' and x[1]>1, bounds.items()))
+    pbounds = list(filter(lambda x: x[0][0]=='+' and x[1]>1, bounds.items()))
+    nbounds = list(filter(lambda x: x[0][0]=='-' and x[1]>1, bounds.items()))
     coords = []
     for p in pbounds:
         for n in nbounds:
             coords.append(((n[0][1]-p[0][1])//2,(n[0][1]+p[0][1])//2))
-    coords = list(filter(lambda x: 0<=x[0]<=20 and 0<=x[1]<=20, coords))
+    coords = list(filter(lambda x: 0<=x[0]<=xylimit and 0<=x[1]<=xylimit, coords))
     tfreq = 0
     for c in coords:
         if not sum([mdist(*c,*x[:2])<=x[4] for x in ml]):
