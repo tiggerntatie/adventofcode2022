@@ -90,8 +90,12 @@ def dec15(fname, row):
         for n in nbounds:
             coords.append(((n[0][1]-p[0][1])//2,(n[0][1]+p[0][1])//2))
     coords = list(filter(lambda x: 0<=x[0]<=20 and 0<=x[1]<=20, coords))
-    print(coords)
-                
+    found = False
+    for c in coords:
+        if not count([mdist(*c,*x[:2])<=x[4] for x in ml]):
+            print(f"found at {c}")
+            break
+
     #print(f"part 2: {count}")
 
 
