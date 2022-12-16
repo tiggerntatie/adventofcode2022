@@ -92,7 +92,7 @@ def dec15(fname, row):
     coords = list(filter(lambda x: 0<=x[0]<=20 and 0<=x[1]<=20, coords))
     found = False
     for c in coords:
-        if not count([mdist(*c,*x[:2])<=x[4] for x in ml]):
+        if not sum([mdist(*c,*x[:2])<=x[4] for x in ml]):
             print(f"found at {c}")
             break
 
