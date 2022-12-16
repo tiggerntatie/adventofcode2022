@@ -37,12 +37,9 @@ def spanjoiner(spans):
         newspans = []
         i = 0
         changed = False
-        print(f"starting spans {ospans}")
         while i < len(ospans)-1:
-            print(f"comparing {ospans[i]} with {ospans[i+1]}")
             if ol := aoverlapb(*ospans[i], *ospans[i+1]):
                 newspans.append(ol)
-                print(f"combined to {ol}")
                 changed = True
                 i += 2
             else:
@@ -62,9 +59,7 @@ def dec15(fname, row):
     spans = spanjoiner(list(filter(lambda x: x, [boundsdist(row, l[4], l[0], l[1]) for l in ml])))
     rowbeacons = list(filter(lambda l: l[3] == row, ml))
     rowbeacons = set([(l[2],l[3]) for l in rowbeacons])
-    # onlyl count rowbeacons within spans
-    print(f"spans {spans}")
-    print(f"rowbeacons {rowbeacons}")
+    # only count rowbeacons within spans
     rbc = 0
     for s in spans:
         for b in rowbeacons:
