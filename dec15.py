@@ -1,5 +1,6 @@
 # Advent of code 15
 from re import compile
+from collections import Counter
 from aocutils import *
 # Sample: row 10: 26  and 
 # Actual: row 2000000: 5607466 and  
@@ -66,8 +67,20 @@ def dec15(fname, row):
             if b[0] >= s[0] and b[0] <= s[1]:
                 rbc += 1
     count = sum([l[1]-l[0]+1 for l in spans]) - rbc
-
     print(f"part 1: {count}")
+    # part 2
+    # for each sensor/beacon, establish slope (+ or -) and y-int sets
+    # for the first diagonal row of cells outside the disallowed region
+    # we hope to see two sets of coincident lines
+    bounds = Counter()
+    for l in ml:
+        s = []
+        s.append(('+',l[1]+l[4]-l[0]+1))
+        s.append(('-',l[1]+l[4]+l[0]+1))
+        s.append(('+',l[1]-l[4]-l[0]-1))
+        s.append(('-',l[1]-l[4]+l[0]-1))
+        bounds.update(s)
+    print(bounds)
     #print(f"part 2: {count}")
 
 
