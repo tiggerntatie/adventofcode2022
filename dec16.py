@@ -10,6 +10,8 @@ def bvf(vd, startvalve, timeleft):
     if timeleft <= 0:
         return 0
     v = vd[startvalve]
+    t1 = []
+    t2 = []
     if v[1]:    # valve already open, get times to other nodes
         t1 = [bvf(vd, xx, timeleft-1) for xx in v[2]]
     else:
