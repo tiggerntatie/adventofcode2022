@@ -2,7 +2,7 @@
 from re import compile
 from collections import Counter
 from aocutils import *
-# Sample: and 
+# Sample: 1651 and 
 # Actual: and 
 
      
@@ -18,5 +18,5 @@ def dec16(fname):
 
 print("Sample")
 dec16("dec16s.txt")
-print("Actual")
-dec16("dec16.txt")  
+#print("Actual")
+#dec16("dec16.txt")  
