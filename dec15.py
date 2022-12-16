@@ -73,6 +73,8 @@ def dec15(fname, row):
     # for the first diagonal row of cells outside the disallowed region
     # we hope to see two sets of coincident lines
     bounds = Counter()
+    xylimit = 20
+    #xylimit = 4000000
     for l in ml:
         s = []
         s.append(('+',l[1]+l[4]-l[0]+1))
@@ -87,9 +89,9 @@ def dec15(fname, row):
     for p in pbounds:
         for n in nbounds:
             coords.append(((n[0][1]-p[0][1])//2,(n[0][1]+p[0][1])//2))
-    #print(pbounds)
-    #print(nbounds)
+    coords = list(filter(lambda x: 0<=x[0]<=20 and 0<=x[1]<=20, coords))
     print(coords)
+                
     #print(f"part 2: {count}")
 
 
