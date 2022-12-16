@@ -20,7 +20,7 @@ def bvf(vd, startvalve, timeleft):
     else:
         # assume opening valve: remaining flow for this valve plus the rest
         v[1] = 1
-        t2 = [v[0]*(timeleft-1) + bvf(vd, xx, timeleft-1) for xx in v[2]]
+        t2 = [v[0]*(timeleft-1) + bvf(vd, xx, timeleft-2) for xx in v[2]]
     return max(t1+t2)
      
 # example input line
