@@ -10,8 +10,6 @@ def bvf(vd, startvalve, timeleft):
     print(f"{startvalve} {timeleft}")
     if timeleft <= 0:
         return 0
-    if timeleft in [28, 29]:
-        return 0
     v = vd[startvalve]
     t1 = []
     t2 = []
@@ -31,7 +29,7 @@ def dec16(fname):
     # flow rate, open/closed, connected valve list
     for v in [valves.search(s) for s in flistofstrings(fname)]:
         vd[v.group(1)] = [int(v.group(2)), 0, v.group(3).split(', ')]
-    totflow = bvf(vd, 'AA', 30)
+    totflow = bvf(vd, 'AA', 5)
     print(f"part 1: {totflow}")
 
     #print(f"part 2: {tfreq}")
