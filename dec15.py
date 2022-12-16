@@ -91,12 +91,12 @@ def dec15(fname, row):
             coords.append(((n[0][1]-p[0][1])//2,(n[0][1]+p[0][1])//2))
     coords = list(filter(lambda x: 0<=x[0]<=20 and 0<=x[1]<=20, coords))
     found = False
+    tfreq = 0
     for c in coords:
         if not sum([mdist(*c,*x[:2])<=x[4] for x in ml]):
-            print(f"found at {c}")
+            tfreq = 4000000*c[0]+c[1]
             break
-
-    #print(f"part 2: {count}")
+    print(f"part 2: {tfreq}")
 
 
 print("Sample")
