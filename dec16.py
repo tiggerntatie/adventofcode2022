@@ -8,7 +8,6 @@ from aocutils import *
 valvecount = 0
 #  best valve flow
 def bvf(vd, startvalve, timeleft, valveson):
-    global valveson
     if valveson == valvecount:
         return (0, valveson)
     if timeleft <= 1:
