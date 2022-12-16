@@ -80,6 +80,8 @@ def dec15(fname, row):
         s.append(('+',l[1]-l[4]-l[0]-1))
         s.append(('-',l[1]-l[4]+l[0]-1))
         bounds.update(s)
+    # remove singletons
+    bounds = list(filter(lambda x: x[1]>1, bounds))
     print(bounds)
     #print(f"part 2: {count}")
 
