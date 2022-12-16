@@ -83,8 +83,13 @@ def dec15(fname, row):
     # remove singletons and split into + and -
     pbounds = list(filter(lambda x: x[0][0]=='+' and x[1]>1, bounds.items()))
     nbounds = list(filter(lambda x: x[0][0]=='-' and x[1]>1, bounds.items()))
-    print(pbounds)
-    print(nbounds)
+    coords = []
+    for p in pbounds:
+        for n in nbounds:
+            coords.append((n[0][1]-p[0][1],(n[0][1]+p[0][1])//2))
+    #print(pbounds)
+    #print(nbounds)
+    print(coords)
     #print(f"part 2: {count}")
 
 
