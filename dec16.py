@@ -5,10 +5,17 @@ from aocutils import *
 # Sample: 1651 and 
 # Actual: and 
 
-def bestvalveflow(vd, startvalve, timeleft):
-    if not timeleft:
+#  best valve flow
+def bvf(vd, startvalve, timeleft):
+    if timeleft <= 0:
         return 0
-    if 
+    v = vd[startvalve]
+    if v[1]:    # valve already open, get times to other nodes
+        t1 = [bvf(vd, xx, timeleft-1) for xx in v[2]]
+    else
+        # assume opening valve: remaining flow for this valve plus the rest
+        t2 = [v[0]*(timeleft-1) + bvf(vd, xx, timeleft-1) for xx in v[2]]
+    return max(t1+t2)
      
 # example input line
 # Valve BB has flow rate=13; tunnels lead to valves CC, AA
@@ -18,7 +25,7 @@ def dec16(fname):
     # flow rate, open/closed, connected valve list
     for v in [valves.search(s) for s in flistofstrings(fname)]:
         vd[v.group(1)] = [int(v.group(2)), 0, v.group(3).split(', ')]
-    flowrate = bestvalveflow(vd, 'AA', 30)
+    flowrate = bvf(vd, 'AA', 30)
     #print(f"part 1: {count}")
 
     #print(f"part 2: {tfreq}")
