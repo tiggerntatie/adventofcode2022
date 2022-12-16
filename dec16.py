@@ -12,7 +12,7 @@ def bvf(vd, startvalve, timeleft):
     v = vd[startvalve]
     if v[1]:    # valve already open, get times to other nodes
         t1 = [bvf(vd, xx, timeleft-1) for xx in v[2]]
-    else
+    else:
         # assume opening valve: remaining flow for this valve plus the rest
         t2 = [v[0]*(timeleft-1) + bvf(vd, xx, timeleft-1) for xx in v[2]]
     return max(t1+t2)
