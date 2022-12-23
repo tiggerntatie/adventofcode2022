@@ -3,7 +3,7 @@ from aocutils import *
 from collections import Counter
 from re import compile
 # Sample:  64 and 
-# Actual:   and 
+# Actual:  3346 and 
 
 def sides(c):
     return ((c[0],c[1],c[2]+0.5), 
