@@ -20,11 +20,10 @@ def dec18(fname):
     for c in cl:
         faces.update(sides(c))
     nakedfaces = filter(lambda x: x[1] == 1, faces.items())
-    print()
     print(f"part 1: {len(list(nakedfaces))}")
 #    print(f"part 2: {len(sides)}")
  
 print("Sample")
 dec18("dec18s.txt")
-#print("Actual")
-#dec18("dec18.txt")
+print("Actual")
+dec18("dec18.txt")
