@@ -17,11 +17,10 @@ def dec18(fname):
     faces = Counter()
     cubes = compile("(\d+),(\d+),(\d+)")
     cl = [(int(x.group(1)), int(x.group(2)), int(x.group(3))) for x in [cubes.search(x) for x in flistofstrings(fname)]]
-    #print(cl)
     for c in cl:
         faces.update(sides(c))
     print(faces)
-    nakedfaces = filter(lambda x: x[1] != 1, faces)
+    nakedfaces = filter(lambda x: x[1] != 1, faces.items())
     print(len(list(nakedfaces)))
 #    print(f"part 1: {len(sides)}")
 #    print(f"part 2: {len(sides)}")
