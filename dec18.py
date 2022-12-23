@@ -6,12 +6,12 @@ from re import compile
 # Actual:   and 
 
 def sides(c):
-    return set(((c[0],c[1],c[2]+0.5), 
+    return ((c[0],c[1],c[2]+0.5), 
         (c[0],c[1],c[2]-0.5),
         (c[0],c[1]+0.5,c[2]),
         (c[0],c[1]-0.5,c[2]),
         (c[0]+0.5,c[1],c[2]),
-        (c[0]-0.5,c[1],c[2])))
+        (c[0]-0.5,c[1],c[2]))
 
 def dec18(fname):
     faces = Counter()
@@ -20,7 +20,7 @@ def dec18(fname):
     for c in cl:
         faces.update(sides(c))
     nakedfaces = filter(lambda x: x[1] == 1, faces)
-    print(nakedfaces)
+    print(list(nakedfaces))
 #    print(f"part 1: {len(sides)}")
 #    print(f"part 2: {len(sides)}")
  
