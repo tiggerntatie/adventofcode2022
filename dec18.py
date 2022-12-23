@@ -31,7 +31,7 @@ def dec18(fname):
         for y in range(ymm[0]+1, ymm[1]):
             for z in range(zmm[0]+1, zmm[1]):
                 if (x,y,z) not in cset:
-                    if len(set([(x+1,y,z),(x-1,y,z),(x,y+1,z),(x,y-1,z),(x,y,z+1),(x,y,z-1)]).intersects(cset)) == 6:
+                    if len(set([(x+1,y,z),(x-1,y,z),(x,y+1,z),(x,y-1,z),(x,y,z+1),(x,y,z-1)]).intersection(cset)) == 6:
                         holecount += 1
 #    print(f"part 2: {len(sides)}")
  
