@@ -23,17 +23,17 @@ def dec18(fname):
     zmm = (min(uzcl[2]),max(uzcl[2]))
     for c in cl:
         faces.update(sides(c))
-    nakedfaces = filter(lambda x: x[1] == 1, faces.items())
-    print(f"part 1: {len(list(nakedfaces))}")
+    nakedfacescount = len(list(filter(lambda x: x[1] == 1, faces.items())))
+    print(f"part 1: {nakedfacescount}")
     cset = set(cl)
-    holecount = 0
+    holefacecount = 0
     for x in range(xmm[0]+1, xmm[1]):
         for y in range(ymm[0]+1, ymm[1]):
             for z in range(zmm[0]+1, zmm[1]):
                 if (x,y,z) not in cset:
                     if len(set([(x+1,y,z),(x-1,y,z),(x,y+1,z),(x,y-1,z),(x,y,z+1),(x,y,z-1)]).intersection(cset)) == 6:
-                        holecount += 1
-#    print(f"part 2: {len(sides)}")
+                        holefacecount += 6
+    print(f"part 2: {nakedfacescount - holefacecount}")
  
 print("Sample")
 dec18("dec18s.txt")
