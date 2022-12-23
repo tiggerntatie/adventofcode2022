@@ -2,8 +2,8 @@
 from aocutils import *
 from collections import Counter
 from re import compile
-# Sample:  64 and 
-# Actual:  3346 and 
+# Sample:  64 and 58
+# Actual:  3346 and 3178
 
 def sides(c):
     return ((c[0],c[1],c[2]+0.5), 
