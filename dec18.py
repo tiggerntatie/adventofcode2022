@@ -19,11 +19,9 @@ def dec18(fname):
     cl = [(int(x.group(1)), int(x.group(2)), int(x.group(3))) for x in [cubes.search(x) for x in flistofstrings(fname)]]
     for c in cl:
         faces.update(sides(c))
-    #print(faces)
-    print(faces.items())
     nakedfaces = filter(lambda x: x[1] == 1, faces.items())
-    print(len(list(nakedfaces)))
-#    print(f"part 1: {len(sides)}")
+    print()
+    print(f"part 1: {len(list(nakedfaces))}")
 #    print(f"part 2: {len(sides)}")
  
 print("Sample")
