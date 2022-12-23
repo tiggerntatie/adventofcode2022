@@ -17,6 +17,11 @@ def dec18(fname):
     faces = Counter()
     cubes = compile("(\d+),(\d+),(\d+)")
     cl = [(int(x.group(1)), int(x.group(2)), int(x.group(3))) for x in [cubes.search(x) for x in flistofstrings(fname)]]
+    uzcl = list(zip(*cl))
+    xmm = (min(uzcl[0]),max(uzcl[0]))
+    ymm = (min(uzcl[1]),max(uzcl[1]))
+    zmm = (min(uzcl[2]),max(uzcl[2]))
+    print(xmm, ymm, zmm)
     for c in cl:
         faces.update(sides(c))
     nakedfaces = filter(lambda x: x[1] == 1, faces.items())
