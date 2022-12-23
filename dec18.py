@@ -21,11 +21,18 @@ def dec18(fname):
     xmm = (min(uzcl[0]),max(uzcl[0]))
     ymm = (min(uzcl[1]),max(uzcl[1]))
     zmm = (min(uzcl[2]),max(uzcl[2]))
-    print(xmm, ymm, zmm)
     for c in cl:
         faces.update(sides(c))
     nakedfaces = filter(lambda x: x[1] == 1, faces.items())
     print(f"part 1: {len(list(nakedfaces))}")
+    cset = set(cl)
+    holecount = 0
+    for x in range(xmm[0]+1, xmm[1]):
+        for y in range(ymm[0]+1, ymm[1]):
+            for z in range(zmm[0]+1, zmm[1]):
+                if (x,y,z) not in cset:
+                    if len(set([(x+1,y,z),(x-1,y,z),(x,y+1,z),(x,y-1,z),(x,y,z+1),(x,y,z-1)]).intersects(cset)) == 6:
+                        holecount += 1
 #    print(f"part 2: {len(sides)}")
  
 print("Sample")
